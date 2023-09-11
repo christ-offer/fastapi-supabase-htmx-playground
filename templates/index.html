@@ -1,0 +1,16 @@
+{# templates/index.html #} {% extends "base.html" %} {% block title %}{{ title
+}}{% endblock title %} {% block content %}
+<div>
+  <button
+    hx-post="signout"
+    hx-on:htmx:after-request="window.location.href='/auth'"
+    hx-swap="none"
+  >
+    Sign Out
+  </button>
+  <div>
+    <h1 class="text-2xl">Welcome In</h1>
+    <p class="text-s">{{ data.user.email }}</p>
+  </div>
+</div>
+{% endblock content %}

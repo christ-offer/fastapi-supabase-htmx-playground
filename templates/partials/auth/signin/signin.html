@@ -1,0 +1,22 @@
+<form class="p-5">
+  <input
+    class="mb-2 w-full px-3 py-2 bg-gray-200"
+    type="email"
+    name="email"
+    placeholder="Email Address"
+  />
+  <input
+    class="mb-2 w-full px-3 py-2 bg-gray-200"
+    type="password"
+    name="password"
+    placeholder="Password"
+  />
+  <button
+    class="mb-2 px-8 py-2 bg-gray-200"
+    hx-post="/signin"
+    hx-swap="none"
+    hx-on:htmx:after-request="window.location.href = '/'"
+  >
+    Sign In
+  </button>
+</form>

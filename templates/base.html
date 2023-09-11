@@ -1,0 +1,27 @@
+{# templates/base.html #}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://unpkg.com/htmx.org@1.9.5"
+      integrity="sha384-xcuj3WpfgjlKF+FXhSQFQ0ZNr39ln+hwjN3npfM9VBnUskLolQAcN80McRIVOPuO"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.11"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <title>{% block title %}{{ title }}{% endblock title %}</title>
+  </head>
+  <body class="bg-white grid grid-cols-12">
+    <header class="col-start-1 col-end-13 bg-slate-200 py-10">
+      <h1 class="text-3xl font-bold text-center">Welcome to {{ title }}!</h1>
+    </header>
+    <main class="col-start-5 col-end-9 main">
+      {% block content %} {% endblock content %}
+    </main>
+  </body>
+</html>

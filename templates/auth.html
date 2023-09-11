@@ -1,0 +1,27 @@
+{# templates/auth.html #} {% extends "base.html" %} {% block title %} Please
+Sign In to continue {% endblock title %} {% block content %}
+<div x-data="{ tab: 'signin'}" class="my-10 grid">
+  <div x-show="tab === 'signup'" class="grid">
+    {% include "partials/auth/signup/signup.html" %}
+    <a
+      class="m-auto bg-blue-300 p-4 mb-4 rounded-sm"
+      :class="{ 'active': tab === 'signin' }"
+      @click.prevent="tab = 'signin'"
+      href="#"
+    >
+      Already registered? Sign In!
+    </a>
+  </div>
+  <div x-show="tab === 'signin'" class="grid">
+    {% include "partials/auth/signin/signin.html" %}
+    <a
+      class="m-auto bg-blue-300 p-4 mb-4 rounded-sm"
+      :class="{ 'active': tab === 'signup' }"
+      @click.prevent="tab = 'signup'"
+      href="#"
+    >
+      No account yet? Sign Up!
+    </a>
+  </div>
+</div>
+{% endblock content %}
