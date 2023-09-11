@@ -14,13 +14,35 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="/static/styles.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brutalgreen: "#4ea4a1",
+              brutalyellow: "#fcc52c",
+              clifford: "#da373d",
+              brutalpurple: "#8669d7",
+              antiquepaper: "#f8f4e3",
+            },
+            boxShadow: {
+              brutal: "15px 10px 0px 0px rgba(0,0,0,0.75)",
+            },
+          },
+        },
+      };
+    </script>
     <title>{% block title %}{{ title }}{% endblock title %}</title>
   </head>
-  <body class="bg-white grid grid-cols-12">
-    <header class="col-start-1 col-end-13 bg-slate-200 py-10">
+  <body class="bg-antiquepaper grid grid-cols-12">
+    <header
+      class="col-start-1 col-end-13 bg-brutalgreen border-b-black border-b-8 py-10"
+    >
       <h1 class="text-3xl font-bold text-center">Welcome to {{ title }}!</h1>
     </header>
-    <main class="col-start-5 col-end-9 main">
+    <main
+      class="col-start-5 col-end-9 main bg-brutalpurple p-10 mt-10 shadow-brutal"
+    >
       {% block content %} {% endblock content %}
     </main>
   </body>

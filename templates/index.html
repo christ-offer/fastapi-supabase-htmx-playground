@@ -1,5 +1,8 @@
-{# templates/index.html #} {% extends "base.html" %} {% block title %}{{ title
-}}{% endblock title %} {% block content %}
+<!-- prettier-ignore -->
+{# templates/index.html #} 
+{% extends "base.html" %} 
+{% block title %} {{ title }} {% endblock title %} 
+{% block content %}
 <div>
   <button
     hx-post="signout"
@@ -10,7 +13,17 @@
   </button>
   <div>
     <h1 class="text-2xl">Welcome In</h1>
-    <p class="text-s">{{ data.user.email }}</p>
+    <h2 class="text-xl">Your Profile</h2>
+    <p class="text-s">{{ profile.data.email }}</p>
+    <p id="display_name" class="text-s">{{ profile.data.display_name }}</p>
+    <input type="text" name="display_name" id="display_name" />
+    <button
+      hx-post="/update_display_name"
+      hx-target="#display_name"
+      hx-swap="innerHTML"
+    >
+      Update Display name
+    </button>
   </div>
 </div>
 {% endblock content %}

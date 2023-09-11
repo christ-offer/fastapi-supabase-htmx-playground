@@ -17,10 +17,37 @@ templates = Jinja2Templates(directory="templates")
 async def index(request: Request):
     try:
         data = supa.auth.get_user()
-        return templates.TemplateResponse(
-            "index.html",
-            {"request": request, "title": "Logged In!", "data": data},
-        )
+        if data.user:
+            profile = (
+                supa.table("profile")
+                .select("*")
+                .eq("id", data.user.id)
+                .single()
+                .execute()
+            )
+            print(profile)
+            if profile:
+                print("Profile is not empty.")
+                return templates.TemplateResponse(
+                    "index.html",
+                    {
+                        "request": request,
+                        "title": "Logged In!",
+                        "data": data.user.email,
+                        "profile": profile,
+                    },
+                )
+            else:
+                print("Profile is empty.")
+                return templates.TemplateResponse(
+                    "index.html",
+                    {
+                        "request": request,
+                        "title": "Logged In!",
+                        "data": "Empty profile",
+                    },
+                )
+
     except Exception as e:
         print("Error: ", e)
         return RedirectResponse(url="/auth", status_code=302)
@@ -39,10 +66,12 @@ async def signup(request: Request, email: str = Form(...), password: str = Form(
     if email and password:
         print("Signing up...")
         try:
-            supa.auth.sign_up({"email": email, "password": password})
+            print("Email: ", email)
+            print("Password: ", password)
+            user = supa.auth.sign_up({"email": email, "password": password})
             return templates.TemplateResponse(
                 "partials/auth/signup/signup_success.html",
-                {"request": request, "email": email, "password": password},
+                {"request": request, "email": user},
             )
         except Exception as e:
             print("Error: ", e)
