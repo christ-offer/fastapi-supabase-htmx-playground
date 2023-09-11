@@ -1,4 +1,4 @@
-# FastAPI - HTMX Playground
+# FastAPI - HTMX - Supabase Playground
 
 Not much going on here at the moment.
 
