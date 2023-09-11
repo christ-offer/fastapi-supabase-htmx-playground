@@ -11,5 +11,6 @@ Stackerino:
 - Alpine.js (For some dynamic css behaviour for now)
 - Hyperscript (Nothing in the code yet, just wanted to try it out)
 - TailwindCSS
+- Supabase
 
 As you can see from the above stack. I like Locality of Behaviour.
