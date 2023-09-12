@@ -1,22 +1,26 @@
-<form class="p-5">
-  <input
-    class="mb-2 w-full px-3 py-2 bg-gray-200"
-    type="email"
-    name="email"
-    placeholder="Email Address"
-  />
-  <input
-    class="mb-2 w-full px-3 py-2 bg-gray-200"
-    type="password"
-    name="password"
-    placeholder="Password"
-  />
-  <button
-    class="mb-2 px-8 py-2 bg-gray-200"
-    hx-post="/signin"
-    hx-swap="none"
-    hx-on:htmx:after-request="window.location.href = '/'"
-  >
-    Sign In
-  </button>
+<form
+  class="grid bg-brutalpurple p-10 mt-10 shadow-brutal rounded-xl border-4 border-black mb-10 pt-20"
+>
+  <form>
+    <input
+      class="mb-4 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
+      type="email"
+      name="email"
+      placeholder="Email Address"
+    />
+    <input
+      class="mb-2 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
+      type="password"
+      name="password"
+      placeholder="Password"
+    />
+    <button
+      class="mb-2 px-8 py-2 bg-brutalpink place-self-end w-fit rounded-xl border-4 border-black shadow-brutalsmall"
+      hx-post="/signin"
+      hx-swap="none"
+      hx-on:htmx:after-request="window.location.href = '/'"
+    >
+      Sign In
+    </button>
+  </form>
 </form>

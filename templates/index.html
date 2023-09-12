@@ -3,27 +3,33 @@
 {% extends "base.html" %} 
 {% block title %} {{ title }} {% endblock title %} 
 {% block content %}
-<div>
-  <button
-    hx-post="signout"
-    hx-on:htmx:after-request="window.location.href='/auth'"
-    hx-swap="none"
-  >
-    Sign Out
-  </button>
+<div
+  class="grid bg-brutalpurple p-10 mt-10 shadow-brutal rounded-xl border-4 border-black mb-10"
+>
   <div>
-    <h1 class="text-2xl">Welcome In</h1>
-    <h2 class="text-xl">Your Profile</h2>
-    <p class="text-s">{{ profile.data.email }}</p>
-    <p id="display_name" class="text-s">{{ profile.data.display_name }}</p>
-    <input type="text" name="display_name" id="display_name" />
-    <button
-      hx-post="/update_display_name"
-      hx-target="#display_name"
-      hx-swap="innerHTML"
-    >
-      Update Display name
-    </button>
+    <div>
+      <h1 class="text-2xl">Welcome In</h1>
+      <h2 class="text-xl">Your Profile</h2>
+      <p class="text-s">Email: {{ profile.data.email }}</p>
+      <p id="display_name" class="text-s">Username: {{ profile.data.display_name }}</p>
+      <input type="text" name="display_name" id="display_name" />
+      <button
+        hx-post="/update_display_name"
+        hx-target="#display_name"
+        hx-swap="innerHTML"
+      >
+        Update Display name
+      </button>
+    </div>
   </div>
+    <button
+      class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded border-black border-4 shadow-brutalsmall place-self-end"
+      hx-post="signout"
+      hx-on:htmx:after-request="window.location.href='/auth'"
+      hx-swap="none"
+    >
+      Sign Out
+    </button>
+
+  {% endblock content %}
 </div>
-{% endblock content %}

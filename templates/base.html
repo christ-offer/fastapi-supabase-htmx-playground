@@ -23,10 +23,12 @@
               brutalyellow: "#fcc52c",
               clifford: "#da373d",
               brutalpurple: "#8669d7",
-              antiquepaper: "#f8f4e3",
+              antiquepaper: "#f5ebd7",
+              brutalpink: "#f6b7d6",
             },
             boxShadow: {
-              brutal: "15px 10px 0px 0px rgba(0,0,0,0.75)",
+              brutal: "15px 10px 0px 0px rgba(0,0,0,1)",
+              brutalsmall: "10px 5px 0px 0px rgba(0,0,0,1)",
             },
           },
         },
@@ -36,13 +38,11 @@
   </head>
   <body class="bg-antiquepaper grid grid-cols-12">
     <header
-      class="col-start-1 col-end-13 bg-brutalgreen border-b-black border-b-8 py-10"
+      class="mt-4 col-start-2 col-end-12 bg-brutalgreen/75 border-black border-4 shadow-brutal rounded-xl py-10"
     >
-      <h1 class="text-3xl font-bold text-center">Welcome to {{ title }}!</h1>
+      <h1 class="text-3xl font-bold text-center">Welcome!</h1>
     </header>
-    <main
-      class="col-start-5 col-end-9 main bg-brutalpurple p-10 mt-10 shadow-brutal"
-    >
+    <main class="col-start-5 col-end-9 main">
       {% block content %} {% endblock content %}
     </main>
   </body>

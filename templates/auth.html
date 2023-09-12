@@ -7,7 +7,7 @@
   <div x-show="tab === 'signup'" class="grid">
     {% include "partials/auth/signup/signup.html" %}
     <a
-      class="m-auto bg-brutalyellow p-4 mb-4 rounded-sm"
+      class="m-auto bg-brutalyellow p-4 mb-4 rounded-xl border-black border-4 shadow-brutalsmall"
       :class="{ 'active': tab === 'signin' }"
       @click.prevent="tab = 'signin'"
       href="#"
@@ -18,7 +18,7 @@
   <div x-show="tab === 'signin'" class="grid">
     {% include "partials/auth/signin/signin.html" %}
     <a
-      class="m-auto bg-brutalyellow p-4 mb-4 rounded-sm"
+      class="m-auto bg-brutalyellow p-4 mb-4 rounded-xl border-black border-4 shadow-brutalsmall"
       :class="{ 'active': tab === 'signup' }"
       @click.prevent="tab = 'signup'"
       href="#"
