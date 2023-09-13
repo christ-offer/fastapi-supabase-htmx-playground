@@ -1,14 +1,16 @@
-# One CLI to format the code tree - https://github.com/numtide/treefmt
-
 [formatter.python]
 command = "black"
 includes = [ "*.py" ]
 
-[formatter.html]
+[formatter.frontend]
 command = "prettier"
 options = ["--write"]
 includes = [ 
 	"*.html",
+	"*.js",
+	"*.json",
+	"*.ts",
+	"*.vue",
 	"*.css",
 	"*.md"
 	]

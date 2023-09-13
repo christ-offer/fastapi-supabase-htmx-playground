@@ -25,8 +25,8 @@ async def index(request: Request):
                 .single()
                 .execute()
             )
-            print(profile)
-            if profile:
+            print(profile.data["display_name"])
+            if profile.data["display_name"] is not None:
                 print("Profile is not empty.")
                 return templates.TemplateResponse(
                     "index.html",
@@ -39,12 +39,14 @@ async def index(request: Request):
                 )
             else:
                 print("Profile is empty.")
+                print(data.user.email)
                 return templates.TemplateResponse(
-                    "index.html",
+                    "profile.html",
                     {
                         "request": request,
                         "title": "Logged In!",
-                        "data": "Empty profile",
+                        "email": data.user.email,
+                        "profile": profile,
                     },
                 )
 
