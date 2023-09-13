@@ -36,14 +36,13 @@
     </script>
     <title>{% block title %}{{ title }}{% endblock title %}</title>
   </head>
-  <body class="bg-antiquepaper grid grid-cols-12">
-    <header
-      class="mt-4 col-start-2 col-end-12 bg-brutalgreen/75 border-black border-4 shadow-brutal rounded-xl py-10"
-    >
-      <h1 class="text-3xl font-bold text-center">Welcome!</h1>
-    </header>
-    <main class="col-start-5 col-end-9 main">
-      {% block content %} {% endblock content %}
-    </main>
+  <body class="bg-antiquepaper min-h-screen">
+    <!-- prettier-ignore -->
+    {% block header %}
+		{% endblock header %}
+		{% block content %}
+		{% endblock content %}
+		{% block footer %}
+		{% endblock footer %}
   </body>
 </html>

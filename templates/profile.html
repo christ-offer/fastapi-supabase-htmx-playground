@@ -2,45 +2,56 @@
 {# templates/profile.html #}
 {% extends "base.html" %}
 {% block title %} Title % {% endblock %}
-{% block content %}
-<div
-  class="grid bg-brutalpurple mt-10 shadow-brutal rounded-xl border-4 border-black mb-10"
+{% block header %}
+<header
+  class="mt-4 mx-8 bg-brutalgreen/75 border-black border-4 shadow-brutal rounded-xl py-10 max-h-32"
 >
-  <div class="border-b-2 border-black py-4 rounded-t-lg bg-brutalyellow">
-    <h1 class="text-xl text-center">Please complete your profile</h1>
-  </div>
-  <form class="grid p-10">
-    <label
-      class="mb-2 border-4 border-black max-w-fit shadow-brutalsmall rounded-xl p-1 px-2 bg-brutalyellow"
-      for="username"
-      >Username</label
-    >
-    <input
-      class="mb-4 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
-      type="text"
-      name="display_name"
-      placeholder="Preferred username"
-    />
-    <label
-      class="mb-2 border-4 border-black max-w-fit shadow-brutalsmall rounded-xl p-1 px-2 bg-brutalyellow"
-      for="email"
-      >Email
-    </label>
-    <input
-      class="mb-4 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
-      type="email"
-      name="email"
-      value="{{ email }}"
-			disabled
-    />
-  </form>
-  <button
-    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded border-black border-4 shadow-brutalsmall place-self-center mb-4"
-    hx-post="signout"
-    hx-on:htmx:after-request="window.location.href='/auth'"
-    hx-swap="none"
+  <h1 class="text-3xl font-bold text-center">Welcome!</h1>
+</header>
+<!-- prettier-ignore -->
+{% endblock %}
+{% block content %}
+<section class="max-w-lg mx-auto">
+  <div
+    id="profile"
+    class="grid bg-brutalpurple mt-10 shadow-brutal rounded-xl border-4 border-black mb-10"
   >
-    Sign Out
-  </button>
-</div>
+    <div class="border-b-2 border-black py-4 rounded-t-lg bg-brutalyellow">
+      <h1 class="text-xl text-center">Please complete your profile</h1>
+    </div>
+    <form class="grid p-10">
+      <label
+        class="mb-2 border-4 border-black max-w-fit shadow-brutalsmall rounded-xl p-1 px-2 bg-brutalyellow"
+        for="username"
+        >Username</label
+      >
+      <input
+        class="mb-4 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
+        type="text"
+        name="display_name"
+        placeholder="Preferred username"
+      />
+      <label
+        class="mb-2 border-4 border-black max-w-fit shadow-brutalsmall rounded-xl p-1 px-2 bg-brutalyellow"
+        for="email"
+        >Email
+      </label>
+      <input
+        class="mb-4 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
+        type="email"
+        name="email"
+        value="{{ email }}"
+        disabled
+      />
+    </form>
+    <button
+      class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded border-black border-4 shadow-brutalsmall place-self-center mb-4"
+      hx-post="signout"
+      hx-on:htmx:after-request="window.location.href='/auth'"
+      hx-swap="none"
+    >
+      Sign Out
+    </button>
+  </div>
+</section>
 {% endblock %}
