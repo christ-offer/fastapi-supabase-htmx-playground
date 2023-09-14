@@ -16,6 +16,7 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     try:
+        # Check if user is logged in - and if so, check if they have a profile
         data = supa.auth.get_user()
         if data.user:
             profile = (
@@ -26,6 +27,7 @@ async def index(request: Request):
                 .execute()
             )
             print(profile.data["display_name"])
+            # If profile is not empty, show index page
             if profile.data["display_name"] is not None:
                 print("Profile is not empty.")
                 return templates.TemplateResponse(
@@ -38,6 +40,7 @@ async def index(request: Request):
                     },
                 )
             else:
+                # If profile is empty, show complete profile page
                 print("Profile is empty.")
                 print(data.user.email)
                 return templates.TemplateResponse(
@@ -55,7 +58,7 @@ async def index(request: Request):
         return RedirectResponse(url="/auth", status_code=302)
 
 
-# Signup
+# Auth
 @app.get("/auth", response_class=HTMLResponse)
 async def auth(request: Request):
     return templates.TemplateResponse(
@@ -63,13 +66,7 @@ async def auth(request: Request):
     )
 
 
-@app.get("/auth/signin", response_class=HTMLResponse)
-async def signin_form(request: Request):
-    return templates.TemplateResponse(
-        "partials/auth/signin/signin.html", {"request": request}
-    )
-
-
+# Signup
 @app.get("/auth/signup", response_class=HTMLResponse)
 async def signup_form(request: Request):
     return templates.TemplateResponse(
@@ -100,6 +97,14 @@ async def signup(request: Request, email: str = Form(...), password: str = Form(
         )
 
 
+# Signin
+@app.get("/auth/signin", response_class=HTMLResponse)
+async def signin_form(request: Request):
+    return templates.TemplateResponse(
+        "partials/auth/signin/signin.html", {"request": request}
+    )
+
+
 @app.post("/signin", response_class=HTMLResponse)
 async def signin(request: Request, email: str = Form(...), password: str = Form(...)):
     if email and password:
@@ -121,6 +126,7 @@ async def signin(request: Request, email: str = Form(...), password: str = Form(
         )
 
 
+# Complete Profile
 @app.get("/get_user_profile", response_class=HTMLResponse)
 async def get_user_profile(request: Request):
     try:
