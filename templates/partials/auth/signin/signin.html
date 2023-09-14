@@ -1,26 +1,50 @@
-<form
-  class="grid bg-brutalpurple p-10 mt-10 shadow-brutal rounded-xl border-4 border-black mb-10 pt-20"
->
-  <form>
-    <input
-      class="mb-4 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
-      type="email"
-      name="email"
-      placeholder="Email Address"
-    />
-    <input
-      class="mb-2 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
-      type="password"
-      name="password"
-      placeholder="Password"
-    />
-    <button
-      class="mb-2 px-8 py-2 bg-brutalpink place-self-end w-fit rounded-xl border-4 border-black shadow-brutalsmall"
-      hx-post="/signin"
-      hx-swap="none"
-      hx-on:htmx:after-request="window.location.href = '/'"
-    >
-      Sign In
-    </button>
+<!-- prettier-ignore -->
+{# templates/auth/signin/signin.html #}
+{% extends "base.html" %}
+{% block title %}Please Sign In to continue{% endblock title %}
+{% block content %}
+<section class="grid">
+  <div class="place-self-center grid target sample-transition">
+
+<div class="le_content">
+  <form
+    class="grid bg-brutalpurple p-10 mt-10 shadow-brutal rounded-xl border-4 border-black mb-10 pt-20"
+  >
+    <form>
+      <input
+        class="mb-4 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
+        type="email"
+        name="email"
+        placeholder="Email Address"
+      />
+      <input
+        class="mb-2 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
+        type="password"
+        name="password"
+        placeholder="Password"
+      />
+      <button
+        class="mb-2 px-8 py-2 bg-brutalpink place-self-end w-fit rounded-xl border-4 border-black shadow-brutalsmall"
+        hx-post="/signin"
+        hx-swap="none"
+        hx-on:htmx:after-request="window.location.href = '/'"
+      >
+        Sign In
+      </button>
+    </form>
   </form>
-</form>
+  <button
+    class="m-auto bg-brutalyellow p-4 mb-4 rounded-xl border-black border-4 shadow-brutalsmall"
+    hx-get="/auth/signup"
+		hx-push-url="true"
+    hx-trigger="click"
+    hx-target=".target"
+		hx-select=".le_content"
+    hx-swap="innerHTML transition:true"
+  >
+    No account yet? Sign Up!
+  </button>
+</div>
+</div>
+</section>
+{% endblock content %}

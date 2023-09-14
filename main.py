@@ -63,6 +63,20 @@ async def auth(request: Request):
     )
 
 
+@app.get("/auth/signin", response_class=HTMLResponse)
+async def signin_form(request: Request):
+    return templates.TemplateResponse(
+        "partials/auth/signin/signin.html", {"request": request}
+    )
+
+
+@app.get("/auth/signup", response_class=HTMLResponse)
+async def signup_form(request: Request):
+    return templates.TemplateResponse(
+        "partials/auth/signup/signup.html", {"request": request}
+    )
+
+
 @app.post("/signup", response_class=HTMLResponse)
 async def signup(request: Request, email: str = Form(...), password: str = Form(...)):
     if email and password:

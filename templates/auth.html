@@ -3,29 +3,44 @@
 {% extends "base.html" %}
 {% block title %}Please Sign In to continue{% endblock title %}
 {% block content %}
-<section class="place-self-center">
-  <div x-data="{ tab: 'signin'}" class="grid">
-    <div x-show="tab === 'signup'" class="grid">
-      {% include "partials/auth/signup/signup.html" %}
-      <a
+<section class="grid">
+  <div class="place-self-center grid target sample-transition">
+    <div class="le_content">
+      <form
+        class="grid bg-brutalpurple p-10 mt-10 shadow-brutal rounded-xl border-4 border-black mb-10 pt-20"
+      >
+        <input
+          class="mb-4 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
+          type="email"
+          name="email"
+          placeholder="Email Address"
+        />
+        <input
+          class="mb-2 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
+          type="password"
+          name="password"
+          placeholder="Password"
+        />
+        <button
+          class="mb-2 px-8 py-2 bg-brutalpink place-self-end w-fit rounded-xl border-4 border-black shadow-brutalsmall"
+          hx-post="/signup"
+          hx-target=".content"
+        >
+          Sign Up
+        </button>
+        <div class="content"></div>
+      </form>
+      <button
         class="m-auto bg-brutalyellow p-4 mb-4 rounded-xl border-black border-4 shadow-brutalsmall"
-        :class="{ 'active': tab === 'signin' }"
-        @click.prevent="tab = 'signin'"
-        href="#"
+        hx-get="/auth/signin"
+        hx-target=".target"
+				hx-push-url="true"
+        hx-trigger="click"
+				hx-select=".le_content"
+        hx-swap="innerHTML transition:true"
       >
         Already registered? Sign In!
-      </a>
-    </div>
-    <div x-show="tab === 'signin'" class="grid">
-      {% include "partials/auth/signin/signin.html" %}
-      <a
-        class="m-auto bg-brutalyellow p-4 mb-4 rounded-xl border-black border-4 shadow-brutalsmall"
-        :class="{ 'active': tab === 'signup' }"
-        @click.prevent="tab = 'signup'"
-        href="#"
-      >
-        No account yet? Sign Up!
-      </a>
+      </button>
     </div>
   </div>
 </section>
