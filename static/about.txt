@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Kdam Thmor Pro
+- Font Author: Copyright 2022 The Kdam Thmor Pro Project Authors (https://www.github.com/sovichet/kdam-thmor-pro)
+- Font Source: http://fonts.gstatic.com/s/kdamthmorpro/v4/EJRPQgAzVdcI-Qdvt34jzurnGA7_j89I8ZWb.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))

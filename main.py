@@ -143,6 +143,44 @@ async def get_user_profile(request: Request):
         )
 
 
+@app.post("/complete_profile", response_class=HTMLResponse)
+async def complete_profile(
+    request: Request,
+    display_name: str = Form(...),
+    first_name: str = Form(...),
+    last_name: str = Form(...),
+    email: str = Form(...),
+):
+    if display_name and first_name and last_name:
+        print("Completing prorfile...")
+        user = supa.auth.get_user()
+        try:
+            # Update profile for matching user id
+            supa.table("profile").upsert(
+                {
+                    "id": user.user.id,
+                    "display_name": display_name,
+                    "email": email,
+                    "first_name": first_name,
+                    "last_name": last_name,
+                }
+            ).execute()
+            return templates.TemplateResponse(
+                "partials/auth/profile/profile_success.html",
+                {
+                    "request": request,
+                    "display_name": display_name,
+                    "first_name": first_name,
+                    "last_name": last_name,
+                },
+            )
+        except Exception as e:
+            print("Error: ", e)
+            return templates.TemplateResponse(
+                "partials/auth/profile/profile_fail.html", {"request": request}
+            )
+
+
 # Signout
 @app.post("/signout", response_class=HTMLResponse)
 async def signout(request: Request):

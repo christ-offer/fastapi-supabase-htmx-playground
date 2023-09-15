@@ -4,14 +4,14 @@
 {% block title %} {{ title }} {% endblock title %}
 {% block header %}
 <header
-  class="mt-4 bg-brutalgreen/75 border-black border-4 shadow-brutal rounded-xl py-10"
+  class="mt-4 mx-10 bg-brutalgreen/75 border-black border-4 shadow-brutal rounded-xl py-10"
 >
   <h1 class="text-3xl font-bold text-center">Welcome!</h1>
 </header>
 <!-- prettier-ignore -->
 {% endblock header %}
 {% block content %}
-<section>
+<section class="max-w-lg mx-auto">
   <div
     class="grid bg-brutalpurple p-10 mt-10 shadow-brutal rounded-xl border-4 border-black mb-10"
   >
@@ -23,14 +23,9 @@
         <p id="display_name" class="text-s">
           Username: {{ profile.data.display_name }}
         </p>
-        <input type="text" name="display_name" id="display_name" />
-        <button
-          hx-post="/update_display_name"
-          hx-target="#display_name"
-          hx-swap="innerHTML"
-        >
-          Update Display name
-        </button>
+        <p class="text-s">
+          Name: {{ profile.data.first_name }} {{ profile.data.last_name }}
+        </p>
       </div>
     </div>
     <button

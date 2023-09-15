@@ -22,13 +22,14 @@
     <form class="grid p-10">
       <label
         class="mb-2 border-4 border-black max-w-fit shadow-brutalsmall rounded-xl p-1 px-2 bg-brutalyellow"
-        for="username"
+        for="display_name"
         >Username</label
       >
       <input
         class="mb-4 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
         type="text"
         name="display_name"
+        id="display_name"
         placeholder="Preferred username"
       />
       <label
@@ -40,9 +41,42 @@
         class="mb-4 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
         type="email"
         name="email"
+        id="email"
         value="{{ email }}"
-        disabled
       />
+			<label
+					class="mb-2 border-4 border-black max-w-fit shadow-brutalsmall rounded-xl p-1 px-2 bg-brutalyellow"
+					for=first_name"
+					>First name
+			</label>
+			<input
+					class="mb-4 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
+					type="text"
+					name="first_name"
+					id="first_name"
+					placeholder="First name"
+			/>
+			<label
+					class="mb-2 border-4 border-black max-w-fit shadow-brutalsmall rounded-xl p-1 px-2 bg-brutalyellow"
+					for="last_name"
+					>Last name
+			</label>
+			<input
+					class="mb-4 w-full px-3 py-2 bg-gray-200 rounded-xl border-4 border-black shadow-brutalsmall"
+					type="text"
+					name="last_name"
+					id="last_name"
+					placeholder="Last name"
+			/>
+			<button
+					class="mb-2 px-8 py-2 bg-brutalpink place-self-end w-fit rounded-xl border-4 border-black shadow-brutalsmall"
+					hx-post="/complete_profile"
+					hx-target="#test"
+					hx-swap="innerHTML"
+					hx-trigger="click"
+			>
+			Update
+			</button>
     </form>
     <button
       class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded border-black border-4 shadow-brutalsmall place-self-center mb-4"
@@ -52,6 +86,7 @@
     >
       Sign Out
     </button>
+		<div id="test"></div>
   </div>
 </section>
 {% endblock %}
