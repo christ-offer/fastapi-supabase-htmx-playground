@@ -2,40 +2,17 @@
 {# templates/index.html #}
 {% extends "base.html" %}
 {% block title %} {{ title }} {% endblock title %}
-{% block header %}
-<header
-  class="mt-4 mx-10 bg-brutalgreen/75 border-black border-4 shadow-brutal rounded-xl py-10"
->
-  <h1 class="text-3xl font-bold text-center">Welcome!</h1>
-</header>
-<!-- prettier-ignore -->
-{% endblock header %}
-{% block content %}
-<section class="max-w-lg mx-auto">
-  <div
-    class="grid bg-brutalpurple p-10 mt-10 shadow-brutal rounded-xl border-4 border-black mb-10"
-  >
-    <div>
-      <div>
-        <h1 class="text-2xl">Welcome In</h1>
-        <h2 class="text-xl">Your Profile</h2>
-        <p class="text-s">Email: {{ profile.data.email }}</p>
-        <p id="display_name" class="text-s">
-          Username: {{ profile.data.display_name }}
-        </p>
-        <p class="text-s">
-          Name: {{ profile.data.first_name }} {{ profile.data.last_name }}
-        </p>
-      </div>
-    </div>
-    <button
-      class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded border-black border-4 shadow-brutalsmall place-self-end"
-      hx-post="signout"
-      hx-on:htmx:after-request="window.location.href='/auth'"
-      hx-swap="none"
-    >
-      Sign Out
-    </button>
-  </div>
-</section>
-{% endblock content %}
+	{% block header %}
+
+<div class="grid grid-cols-main min-h-screen" id="#page-container">
+  {% include "/partials/header/header.html" %}
+  <!-- prettier-ignore -->
+  {% endblock header %}
+	{% block content %}
+  <section>
+    <div
+      class="grid bg-brutalpurple p-10 mt-10 shadow-brutal rounded-xl border-4 border-black mb-10"
+    ></div>
+  </section>
+  {% endblock content %} {% block footer %} {% endblock footer %}
+</div>

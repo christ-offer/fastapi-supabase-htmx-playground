@@ -15,54 +15,16 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    try:
-        # Check if user is logged in - and if so, check if they have a profile
-        data = supa.auth.get_user()
-        if data.user:
-            profile = (
-                supa.table("profile")
-                .select("*")
-                .eq("id", data.user.id)
-                .single()
-                .execute()
-            )
-            print(profile.data["display_name"])
-            # If profile is not empty, show index page
-            if profile.data["display_name"] is not None:
-                print("Profile is not empty.")
-                return templates.TemplateResponse(
-                    "index.html",
-                    {
-                        "request": request,
-                        "title": "Logged In!",
-                        "data": data.user.email,
-                        "profile": profile,
-                    },
-                )
-            else:
-                # If profile is empty, show complete profile page
-                print("Profile is empty.")
-                print(data.user.email)
-                return templates.TemplateResponse(
-                    "profile.html",
-                    {
-                        "request": request,
-                        "title": "Logged In!",
-                        "email": data.user.email,
-                        "profile": profile,
-                    },
-                )
-
-    except Exception as e:
-        print("Error: ", e)
-        return RedirectResponse(url="/auth", status_code=302)
+    return templates.TemplateResponse(
+        "index.html", {"request": request, "title": "Home"}
+    )
 
 
 # Auth
 @app.get("/auth", response_class=HTMLResponse)
 async def auth(request: Request):
     return templates.TemplateResponse(
-        "auth.html", {"request": request, "title": "Not logged in"}
+        "auth.html", {"request": request, "title": "Please Sign In or Sign Up"}
     )
 
 
@@ -112,7 +74,36 @@ async def signin(request: Request, email: str = Form(...), password: str = Form(
         print("Email: ", email)
         try:
             supa.auth.sign_in_with_password({"email": email, "password": password})
-            return RedirectResponse(url="/")
+            # If profile is not complete, redirect to /profile
+            user = supa.auth.get_user()
+            profile = (
+                supa.table("profile")
+                .select("*")
+                .eq("id", user.user.id)
+                .single()
+                .execute()
+            )
+            if (
+                profile.data["display_name"]
+                and profile.data["first_name"]
+                and profile.data["last_name"]
+                and profile.data["email"] is not None
+            ):
+                print("Profile is not empty.")
+                response = templates.TemplateResponse(
+                    "partials/auth/signin/signin_success.html",
+                    {"request": request, "email": email},
+                )
+                response.headers["HX-Redirect"] = "/"
+                return response
+            else:
+                # If profile is empty, show complete profile page
+                response = templates.TemplateResponse(
+                    "partials/auth/profile/profile.html",
+                    {"request": request, "email": email},
+                )
+                response.headers["HX-Redirect"] = "/profile"
+                return response
 
         except Exception as e:
             print("Error: ", e)
@@ -127,6 +118,28 @@ async def signin(request: Request, email: str = Form(...), password: str = Form(
 
 
 # Complete Profile
+@app.get("/profile", response_class=HTMLResponse)
+async def profile(request: Request):
+    try:
+        user = supa.auth.get_user()
+        print(user.user.email)
+        if user.user.id is not None:
+            return templates.TemplateResponse(
+                "partials/auth/profile/profile.html", {"request": request}
+            )
+        else:
+            return templates.TemplateResponse(
+                "partials/auth/profile/profile_fail.html", {"request": request}
+            )
+    except Exception as e:
+        print("Error: ", e)
+        response = templates.TemplateResponse(
+            "partials/auth/profile/profile_fail.html", {"request": request}
+        )
+        response.headers["HX-Redirect"] = "/auth"
+        return response
+
+
 @app.get("/get_user_profile", response_class=HTMLResponse)
 async def get_user_profile(request: Request):
     try:
@@ -185,7 +198,9 @@ async def complete_profile(
 @app.post("/signout", response_class=HTMLResponse)
 async def signout(request: Request):
     supa.auth.sign_out()
-    return RedirectResponse(url="/auth", status_code=302)
+    response = RedirectResponse(url="/", status_code=200)
+    response.headers["HX-Redirect"] = "/"
+    return response
 
 
 if __name__ == "__main__":
